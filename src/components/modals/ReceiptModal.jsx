@@ -18,6 +18,9 @@ export default function ReceiptModal({
   variant,      // "customer" | "store" | "alteration_slip"
   orderNumber,  // e.g. "POS-20251210-153045"
   barcodeValue, // e.g. same as orderNumber
+  alterationCharge = 0,
+  courierCharge = 0,
+  otherCharge = 0,
 }) {
   if (!isOpen) return null;
 
@@ -51,11 +54,21 @@ export default function ReceiptModal({
     : baseTitle + (isStoreCopy ? " (Store Copy)" : " (Customer Copy)");
 
   // Rules from spec
-  const showMeasurements = isStoreCopy && !isAlterationSlip;
-  const showNotes = isStoreCopy && !!notes?.trim();
-  const showFullBreakdown = isStoreCopy;        // items + prices + subtotal/charges
-  const showCustomerMinimal = isCustomerCopy;   // names + TOTAL only
-  const showTotalsSection = !isAlterationSlip;  // alteration slip has no totals
+  // Rules from spec
+  // Show measurements if they exist, for ALL copies (request: "measurements ... should be there if provided")
+  const showMeasurements = !!measurements?.trim() && measurements !== "Standard Size";
+
+  // Show notes if they exist, for ALL copies
+  const showNotes = !!notes?.trim();
+
+  // Show full breakdown (prices) only on Store Copy
+  const showFullBreakdown = isStoreCopy;
+
+  // Show minimal (qty only) on Customer Copy
+  const showCustomerMinimal = isCustomerCopy;
+
+  // Show totals section on ALL copies (request: "include ... total amount" even for alteration)
+  const showTotalsSection = true;
 
   const handlePrint = () => {
     // Clone the printable area into a top-level container and print it.
@@ -286,13 +299,27 @@ export default function ReceiptModal({
                       <span>₹{discount.toLocaleString()}</span>
                     </div>
                   )}
-                  {chargesTotal > 0 && (
-                    <div className="flex justify-between mb-1">
-                      <span>Additional charges:</span>
-                      <span>₹{chargesTotal.toLocaleString()}</span>
-                    </div>
-                  )}
                 </>
+              )}
+
+              {/* Detailed breakdown of additional charges */}
+              {alterationCharge > 0 && (
+                <div className="flex justify-between mb-1">
+                  <span>Alteration Chg:</span>
+                  <span>₹{alterationCharge.toLocaleString()}</span>
+                </div>
+              )}
+              {courierCharge > 0 && (
+                <div className="flex justify-between mb-1">
+                  <span>Courier Chg:</span>
+                  <span>₹{courierCharge.toLocaleString()}</span>
+                </div>
+              )}
+              {otherCharge > 0 && (
+                <div className="flex justify-between mb-1">
+                  <span>Other Chg:</span>
+                  <span>₹{otherCharge.toLocaleString()}</span>
+                </div>
               )}
 
               {/* Customer copy: only ONE total row */}

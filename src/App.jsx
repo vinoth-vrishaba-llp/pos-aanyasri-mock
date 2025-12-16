@@ -383,6 +383,10 @@ export default function App() {
         variant={receiptVariant}
         orderNumber={lastOrderId || "POS-DRAFT"}
         barcodeValue={lastOrderId || "POS-DRAFT"}
+        alterationCharge={alterationCharge}
+        courierCharge={courierCharge}
+        otherCharge={otherCharge}
+        discount={discount}
       />
 
       <OrderDetailsModal
