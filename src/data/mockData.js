@@ -152,3 +152,31 @@ export const products = [
 
 export const defaultMeasurements =
   "Bust:\nUpper waist:\nLower waist:\nShoulder:\nArmhole:\nFull length:\nYoke length:";
+
+export const mockCustomers = [
+  {
+    id: "CUST-001",
+    name: "Sunita Sharma",
+    phone: "9876543210",
+    email: "sunita.s@example.com",
+    address: "123, Gandhi Road, Vijayawada",
+    joinedAt: "2024-11-01T10:00:00Z",
+  },
+  {
+    id: "CUST-002",
+    name: "Priya Reddy",
+    phone: "8765432109",
+    email: "priya.r@example.com",
+    address: "45-B, Benz Circle, Vijayawada",
+    joinedAt: "2024-12-15T14:30:00Z",
+  },
+  {
+    id: "CUST-003",
+    name: "Anita Kumar",
+    phone: "7654321098",
+    email: "",
+    address: "Plot 12, Patamata, Vijayawada",
+    joinedAt: "2024-10-20T09:15:00Z",
+  },
+];
+

@@ -2,7 +2,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Routes, Route, Navigate, useLocation } from "react-router-dom";
 
-import { defaultMeasurements } from "./data/mockData";
+import { defaultMeasurements, mockCustomers } from "./data/mockData";
 import { getAccessToken } from "./utils/authStorage";
 
 import Login from "./pages/Login";
@@ -18,7 +18,9 @@ import ReceiptModal from "./components/modals/ReceiptModal";
 import PrintOptionsModal from "./components/modals/PrintOptionsModal";
 import PaymentMethodModal from "./components/modals/PaymentMethodModal";
 import OrderListPage from "./components/orders/OrderListPage";
+import OrderDetailsServiceModal from "./components/modals/OrderDetailsModal"; // Renamed slightly to avoid conflict if any, though likely same file
 import OrderDetailsModal from "./components/modals/OrderDetailsModal";
+import CustomerListPage from "./components/customers/CustomerListPage";
 
 import { fetchCategories } from "./api/categories.api";
 
@@ -89,9 +91,41 @@ export default function App() {
   /* =======================
      ORDERS
   ======================= */
-  const [orders, setOrders] = useState([]);
+  /* =======================
+     ORDERS
+  ======================= */
+  const [orders, setOrders] = useState(() => {
+    const saved = localStorage.getItem("pos_orders");
+    return saved ? JSON.parse(saved) : [];
+  });
+
+  useEffect(() => {
+    localStorage.setItem("pos_orders", JSON.stringify(orders));
+  }, [orders]);
   const [lastOrderId, setLastOrderId] = useState(null);
   const [selectedOrderForDetails, setSelectedOrderForDetails] = useState(null);
+
+  /* =======================
+     CUSTOMERS
+  ======================= */
+  const [customers, setCustomers] = useState(() => {
+    const saved = localStorage.getItem("pos_customers");
+    return saved ? JSON.parse(saved) : mockCustomers;
+  });
+
+  useEffect(() => {
+    localStorage.setItem("pos_customers", JSON.stringify(customers));
+  }, [customers]);
+
+  function addCustomer(newCustomer) {
+    const customerWithId = {
+      ...newCustomer,
+      id: newCustomer.id || `CUST-${Date.now()}`,
+      joinedAt: new Date().toISOString(),
+    };
+    setCustomers((prev) => [...prev, customerWithId]);
+    return customerWithId;
+  }
 
   /* =======================
      POS STATE
@@ -276,6 +310,8 @@ export default function App() {
                     total={grandTotal}
                     currentCustomer={currentCustomer}
                     onOpenCustomerModal={() => setCustomerModalOpen(true)}
+                    customers={customers}
+                    addCustomer={addCustomer}
                     onRemoveItem={(i) =>
                       setCart((p) => p.filter((_, x) => x !== i))
                     }
@@ -321,6 +357,19 @@ export default function App() {
             }
           />
 
+          <Route
+            path="/customers"
+            element={
+              <ProtectedRoute>
+                <CustomerListPage
+                  customers={customers}
+                  orders={orders}
+                  onAddCustomer={addCustomer}
+                />
+              </ProtectedRoute>
+            }
+          />
+
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </div>
@@ -341,8 +390,19 @@ export default function App() {
       <CustomerModal
         isOpen={customerModalOpen}
         onClose={() => setCustomerModalOpen(false)}
+        customers={customers}
         onSave={(c) => {
-          setCurrentCustomer(c);
+          // If customer has ID, it's existing. If not, it's new.
+          // However, our addCustomer returns the object with ID.
+          // The modal usually handles the "create vs select" logic.
+          // For now we trust the modal to give us the final customer object
+          // but if we need to save a NEW one here:
+          if (!c.id) {
+            const newC = addCustomer(c);
+            setCurrentCustomer(newC);
+          } else {
+            setCurrentCustomer(c);
+          }
           setCustomerModalOpen(false);
         }}
       />

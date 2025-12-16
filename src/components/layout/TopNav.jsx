@@ -5,7 +5,11 @@ import { clearAuth } from "../../utils/authStorage";
 export default function TopNav() {
   const navigate = useNavigate();
   const location = useLocation();
-  const activeView = location.pathname === "/orders" ? "orders" : "pos";
+  const activeView = location.pathname === "/orders"
+    ? "orders"
+    : location.pathname === "/customers"
+      ? "customers"
+      : "pos";
 
   function handleLogout() {
     clearAuth();           // remove access token
@@ -39,6 +43,16 @@ export default function TopNav() {
           onClick={() => navigate("/orders")}
         >
           Orders
+        </button>
+
+        <button
+          className={`px-3 py-1 rounded-full border ${activeView === "customers"
+            ? "bg-black text-white border-black"
+            : "bg-white text-gray-700 border-gray-300 hover:border-black"
+            }`}
+          onClick={() => navigate("/customers")}
+        >
+          Customers
         </button>
       </div>
 

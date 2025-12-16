@@ -55,8 +55,8 @@ export default function ReceiptModal({
 
   // Rules from spec
   // Rules from spec
-  // Show measurements if they exist, for ALL copies (request: "measurements ... should be there if provided")
-  const showMeasurements = !!measurements?.trim() && measurements !== "Standard Size";
+  // Show measurements if they exist, but NOT for Customer Copy
+  const showMeasurements = !!measurements?.trim() && measurements !== "Standard Size" && !isCustomerCopy;
 
   // Show notes if they exist, for ALL copies
   const showNotes = !!notes?.trim();
