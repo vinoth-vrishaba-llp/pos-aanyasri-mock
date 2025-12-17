@@ -26,19 +26,19 @@ export default function PrintOptionsModal({
 
         <div className="space-y-2">
           <button
-            className="w-full border rounded-lg py-2 text-sm font-medium hover:bg-gray-50"
+            className="w-full border border-gray-300 rounded-lg py-2.5 text-sm font-bold text-black hover:bg-black hover:text-white transition-colors"
             onClick={() => handleSelect("customer")}
           >
             Customer Copy
           </button>
           <button
-            className="w-full border rounded-lg py-2 text-sm font-medium hover:bg-gray-50"
+            className="w-full border border-gray-300 rounded-lg py-2.5 text-sm font-bold text-black hover:bg-black hover:text-white transition-colors"
             onClick={() => handleSelect("store")}
           >
             Store Copy
           </button>
           <button
-            className="w-full border rounded-lg py-2 text-sm font-medium hover:bg-gray-50"
+            className="w-full border border-gray-300 rounded-lg py-2.5 text-sm font-bold text-black hover:bg-black hover:text-white transition-colors"
             onClick={() => handleSelect("alteration_slip")}
           >
             Alteration Slip

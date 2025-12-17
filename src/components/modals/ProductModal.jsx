@@ -51,7 +51,7 @@ export default function ProductModal({
             {product.name}
           </h3>
           <p className="text-xs text-gray-500 mb-1">SKU: {product.sku}</p>
-          <p className="text-lg font-medium text-blue-600 mb-4">
+          <p className="text-lg font-medium text-black mb-4">
             ₹{product.price.toLocaleString()}
           </p>
 
@@ -83,13 +83,13 @@ export default function ProductModal({
                         outOfStock
                           ? "border-gray-200 text-gray-300 cursor-not-allowed bg-gray-50"
                           : isSelected
-                          ? "bg-black text-white border-black"
-                          : "border-gray-300 hover:border-black",
+                            ? "bg-black text-white border-black"
+                            : "border-gray-300 hover:border-black",
                       ].join(" ")}
                     >
                       <span
                         className={
-                          outOfStock ? "line-through decoration-red-400" : ""
+                          outOfStock ? "line-through decoration-gray-400" : ""
                         }
                       >
                         {size}
@@ -100,7 +100,7 @@ export default function ProductModal({
                         </span>
                       )}
                       {outOfStock && (
-                        <span className="text-[9px] text-red-400 mt-0.5">
+                        <span className="text-[9px] text-gray-400 mt-0.5">
                           OOS
                         </span>
                       )}

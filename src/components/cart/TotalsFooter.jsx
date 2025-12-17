@@ -16,8 +16,8 @@ export default function TotalsFooter({
     paymentMethod === "cash"
       ? "Paid: Cash"
       : paymentMethod === "upi_card"
-      ? "Paid: UPI / Card"
-      : "Not marked as paid";
+        ? "Paid: UPI / Card"
+        : "Not marked as paid";
 
   return (
     <div className="p-4 border-t border-gray-200 bg-white shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] space-y-3">
@@ -49,14 +49,14 @@ export default function TotalsFooter({
       <div className="flex gap-2">
         <button
           onClick={onPrint}
-          className="flex-1 bg-gray-900 hover:bg-gray-800 text-white py-2.5 rounded-lg font-semibold flex items-center justify-center gap-2 transition shadow"
+          className="flex-1 bg-black hover:bg-gray-800 text-white py-2.5 rounded-lg font-bold flex items-center justify-center gap-2 transition shadow-md border border-black"
         >
           <Printer className="w-4 h-4" />
           Print
         </button>
         <button
           onClick={onMarkPaid}
-          className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white py-2.5 rounded-lg font-semibold flex items-center justify-center gap-2 transition shadow"
+          className="flex-1 bg-white hover:bg-gray-50 text-black py-2.5 rounded-lg font-bold flex items-center justify-center gap-2 transition shadow-md border border-gray-300"
         >
           <BadgeCheck className="w-4 h-4" />
           Mark as Paid

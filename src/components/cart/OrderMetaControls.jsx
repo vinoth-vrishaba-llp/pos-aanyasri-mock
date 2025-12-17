@@ -36,10 +36,10 @@ export default function OrderMetaControls({
             type="button"
             onClick={() => handleOrderTypeChange("sale")}
             className={[
-              "px-3 py-1 rounded-full border text-xs font-medium",
+              "px-3 py-1 rounded-full border text-xs font-medium transition-colors",
               orderType === "sale"
                 ? "bg-black text-white border-black"
-                : "bg-white text-gray-700 border-gray-300 hover:border-black",
+                : "bg-white text-gray-700 border-gray-300 hover:border-black hover:text-black",
             ].join(" ")}
           >
             Normal Sale

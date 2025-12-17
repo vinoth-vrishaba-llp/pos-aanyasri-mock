@@ -53,14 +53,14 @@ export default function CustomerModal({ isOpen, onClose, onSave, customers = [] 
               {filteredCustomers.map((c) => (
                 <div
                   key={c.id}
-                  className="p-2 hover:bg-blue-50 flex justify-between items-center cursor-pointer transition-colors"
+                  className="p-2 hover:bg-gray-50 flex justify-between items-center cursor-pointer transition-colors"
                   onClick={() => onSave(c)}
                 >
                   <div>
                     <div className="font-bold text-sm text-gray-800">{c.name}</div>
                     <div className="text-xs text-gray-500">{c.phone}</div>
                   </div>
-                  <div className="text-xs text-blue-600 font-medium bg-blue-50 px-2 py-1 rounded">Select</div>
+                  <div className="text-xs text-black font-medium border border-gray-300 px-2 py-1 rounded hover:bg-black hover:text-white transition-colors">Select</div>
                 </div>
               ))}
             </div>
@@ -118,7 +118,7 @@ export default function CustomerModal({ isOpen, onClose, onSave, customers = [] 
 
             <button
               onClick={handleSave}
-              className="w-full bg-blue-600 text-white py-2 rounded font-medium hover:bg-blue-700"
+              className="w-full bg-black text-white py-2 rounded font-medium hover:bg-gray-800 transition-colors"
             >
               Save &amp; Select Customer
             </button>

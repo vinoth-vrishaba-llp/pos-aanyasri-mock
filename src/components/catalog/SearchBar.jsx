@@ -2,12 +2,16 @@
 import { useRef } from "react";
 import { Search, ScanBarcode, SlidersHorizontal } from "lucide-react";
 import { lookupBySku } from "../../api/products.api";
+import { useSearchFocus } from "../../hooks/useSearchFocus";
 
 export default function SearchBar({
   searchQuery,
   onSearchChange,
   onProductFound, // 👈 NEW
 }) {
+  // Use custom hook for search focus (autofocus + shortcuts)
+  const searchInputRef = useSearchFocus(true);
+
   const barcodeInputRef = useRef(null);
 
   const handleBarcodeClick = () => {
@@ -49,9 +53,10 @@ export default function SearchBar({
       <div className="relative flex-1">
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 w-5 h-5" />
         <input
+          ref={searchInputRef}
           type="text"
           placeholder="Search by product name or SKU..."
-          className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+          className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-black transition"
           value={searchQuery}
           onChange={(e) => onSearchChange(e.target.value)}
         />

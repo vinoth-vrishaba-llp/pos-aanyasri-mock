@@ -1,11 +1,13 @@
 import { useMemo, useState, useRef } from "react";
 import { Search, ScanBarcode, CheckCircle2 } from "lucide-react";
+import { useSearchFocus } from "../../hooks/useSearchFocus";
 
 export default function OrderListPage({
   orders,
   onSelectOrder,
   onMarkCompleted,
 }) {
+  const searchRef = useSearchFocus(true);
   const [search, setSearch] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const barcodeInputRef = useRef(null);
@@ -62,6 +64,7 @@ export default function OrderListPage({
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
           <input
+            ref={searchRef}
             type="text"
             placeholder="Search by order no, customer, phone..."
             className="w-full pl-9 pr-3 py-2 border rounded-lg text-sm"
@@ -139,11 +142,10 @@ export default function OrderListPage({
                   </td>
                   <td className="px-3 py-2">
                     <span
-                      className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] ${
-                        o.status === "completed"
-                          ? "bg-emerald-50 text-emerald-700 border border-emerald-200"
-                          : "bg-amber-50 text-amber-700 border border-amber-200"
-                      }`}
+                      className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] border ${o.status === "completed"
+                        ? "bg-black text-white border-black"
+                        : "bg-white text-gray-800 border-gray-300"
+                        }`}
                     >
                       <CheckCircle2 className="w-3 h-3" />
                       {o.status === "completed" ? "Completed" : "Paid"}
@@ -152,8 +154,8 @@ export default function OrderListPage({
                       {o.paymentMethod === "cash"
                         ? "Cash"
                         : o.paymentMethod === "upi_card"
-                        ? "UPI / Card"
-                        : ""}
+                          ? "UPI / Card"
+                          : ""}
                     </div>
                   </td>
                   <td className="px-3 py-2 text-right">
@@ -168,7 +170,7 @@ export default function OrderListPage({
                         onClick={() =>
                           onMarkCompleted && onMarkCompleted(o.id)
                         }
-                        className="ml-1 text-[11px] px-2 py-1 border rounded-lg hover:bg-emerald-50 text-emerald-700"
+                        className="ml-1 text-[11px] px-2 py-1 border rounded-lg hover:bg-gray-100 hover:border-black text-black transition-colors"
                       >
                         Mark Completed
                       </button>

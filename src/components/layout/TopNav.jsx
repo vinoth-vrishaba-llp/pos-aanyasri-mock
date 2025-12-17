@@ -17,18 +17,24 @@ export default function TopNav() {
   }
 
   return (
-    <header className="flex items-center justify-between px-4 py-2 border-b bg-white">
-      {/* Left */}
-      <div className="font-semibold text-sm">
-        Aanyasri POS
+    <header className="flex items-center justify-between px-6 py-3 border-b border-gray-800 bg-black text-white shadow-md">
+      {/* Left - Logo */}
+      <div className="flex items-center gap-3">
+        <img
+          src="/web-logo-gold.webp"
+          alt="Aanyasri POS"
+          className="h-10 w-auto object-contain"
+          onError={(e) => { e.target.style.display = 'none'; e.target.nextSibling.style.display = 'block'; }}
+        />
+        <span className="font-bold text-lg tracking-wide hidden text-yellow-500">Aanyasri POS</span>
       </div>
 
-      {/* Center */}
-      <div className="flex gap-2 text-xs">
+      {/* Center - Navigation */}
+      <div className="flex gap-4 text-xs font-medium">
         <button
-          className={`px-3 py-1 rounded-full border ${activeView === "pos"
-            ? "bg-black text-white border-black"
-            : "bg-white text-gray-700 border-gray-300 hover:border-black"
+          className={`px-5 py-2 rounded-full transition-all duration-200 border ${activeView === "pos"
+            ? "bg-white text-black border-white shadow-sm"
+            : "bg-transparent text-gray-300 border-gray-700 hover:border-gray-500 hover:text-white"
             }`}
           onClick={() => navigate("/")}
         >
@@ -36,9 +42,9 @@ export default function TopNav() {
         </button>
 
         <button
-          className={`px-3 py-1 rounded-full border ${activeView === "orders"
-            ? "bg-black text-white border-black"
-            : "bg-white text-gray-700 border-gray-300 hover:border-black"
+          className={`px-5 py-2 rounded-full transition-all duration-200 border ${activeView === "orders"
+            ? "bg-white text-black border-white shadow-sm"
+            : "bg-transparent text-gray-300 border-gray-700 hover:border-gray-500 hover:text-white"
             }`}
           onClick={() => navigate("/orders")}
         >
@@ -46,9 +52,9 @@ export default function TopNav() {
         </button>
 
         <button
-          className={`px-3 py-1 rounded-full border ${activeView === "customers"
-            ? "bg-black text-white border-black"
-            : "bg-white text-gray-700 border-gray-300 hover:border-black"
+          className={`px-5 py-2 rounded-full transition-all duration-200 border ${activeView === "customers"
+            ? "bg-white text-black border-white shadow-sm"
+            : "bg-transparent text-gray-300 border-gray-700 hover:border-gray-500 hover:text-white"
             }`}
           onClick={() => navigate("/customers")}
         >
@@ -56,10 +62,10 @@ export default function TopNav() {
         </button>
       </div>
 
-      {/* Right */}
+      {/* Right - Logout */}
       <button
         onClick={handleLogout}
-        className="text-xs px-3 py-1 rounded-full border border-red-300 text-red-600 hover:bg-red-50"
+        className="text-xs px-5 py-2 rounded-full border border-gray-800 bg-gray-900 text-gray-300 hover:bg-red-900 hover:text-red-100 hover:border-red-900 transition-colors"
       >
         Logout
       </button>

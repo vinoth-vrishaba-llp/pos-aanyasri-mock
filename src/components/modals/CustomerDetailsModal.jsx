@@ -32,15 +32,15 @@ export default function CustomerDetailsModal({ customer, orders = [], onClose })
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
                         <div className="bg-gray-50 p-4 rounded-lg space-y-3">
                             <div className="flex items-center gap-3 text-gray-700">
-                                <Phone className="w-4 h-4 text-blue-600" />
+                                <Phone className="w-4 h-4 text-black" />
                                 <span>{customer.phone}</span>
                             </div>
                             <div className="flex items-center gap-3 text-gray-700">
-                                <Mail className="w-4 h-4 text-blue-600" />
+                                <Mail className="w-4 h-4 text-black" />
                                 <span>{customer.email || "No email provided"}</span>
                             </div>
                             <div className="flex items-center gap-3 text-gray-700">
-                                <Calendar className="w-4 h-4 text-blue-600" />
+                                <Calendar className="w-4 h-4 text-black" />
                                 <span>
                                     Joined:{" "}
                                     {customer.joinedAt
@@ -52,7 +52,7 @@ export default function CustomerDetailsModal({ customer, orders = [], onClose })
 
                         <div className="bg-gray-50 p-4 rounded-lg">
                             <div className="flex items-start gap-3 text-gray-700">
-                                <MapPin className="w-4 h-4 text-blue-600 mt-1" />
+                                <MapPin className="w-4 h-4 text-black mt-1" />
                                 <span className="leading-relaxed">
                                     {customer.address || "No address provided"}
                                 </span>
@@ -76,7 +76,7 @@ export default function CustomerDetailsModal({ customer, orders = [], onClose })
                                 {customerOrders.map((order) => (
                                     <div
                                         key={order.id}
-                                        className="border rounded-lg p-4 hover:border-blue-300 transition-colors bg-white"
+                                        className="border rounded-lg p-4 hover:border-black transition-colors bg-white"
                                     >
                                         <div className="flex justify-between items-start mb-2">
                                             <div>
@@ -86,10 +86,10 @@ export default function CustomerDetailsModal({ customer, orders = [], onClose })
                                                 </div>
                                             </div>
                                             <div className="text-right">
-                                                <div className="font-bold text-green-600">
+                                                <div className="font-bold text-black">
                                                     ₹{order.totals?.grandTotal?.toLocaleString()}
                                                 </div>
-                                                <span className="px-2 py-0.5 text-xs rounded-full bg-green-100 text-green-800 capitalize">
+                                                <span className="px-2 py-0.5 text-xs rounded-full bg-white border border-black text-black capitalize">
                                                     {order.status}
                                                 </span>
                                             </div>

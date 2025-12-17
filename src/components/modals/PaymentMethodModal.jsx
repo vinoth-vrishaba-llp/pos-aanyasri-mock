@@ -30,14 +30,14 @@ export default function PaymentMethodModal({
 
         <div className="space-y-2">
           <button
-            className="w-full border rounded-lg py-2 text-sm font-medium hover:bg-gray-50 flex items-center justify-center gap-2"
+            className="w-full border border-gray-300 rounded-lg py-3 text-sm font-bold text-black hover:bg-black hover:text-white transition-colors flex items-center justify-center gap-2"
             onClick={() => handleSelect("cash")}
           >
             <Wallet className="w-4 h-4" />
             Paid by Cash
           </button>
           <button
-            className="w-full border rounded-lg py-2 text-sm font-medium hover:bg-gray-50 flex items-center justify-center gap-2"
+            className="w-full border border-gray-300 rounded-lg py-3 text-sm font-bold text-black hover:bg-black hover:text-white transition-colors flex items-center justify-center gap-2"
             onClick={() => handleSelect("upi_card")}
           >
             <Smartphone className="w-4 h-4" />
